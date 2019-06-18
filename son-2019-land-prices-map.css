@@ -1,0 +1,10 @@
+@import url('https://code.highcharts.com/6.1.4/css/highcharts.css');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400');
+@import url('https://s3.amazonaws.com/jchs-app-source-data/JCHS-highchartrs/src/css/JCHS-highcharts.css');
+
+/* change chart colors here*/
+.highcharts-color-0 { fill: #67A7C1; stroke: #67A7C1; color: #67A7C1; }
+.highcharts-color-1 { fill: #FCF0B0; stroke: #FCF0B0; color: #FCF0B0; }
+.highcharts-color-2 { fill: #D5BB30; stroke: #D5BB30; color: #D5BB30; }
+.highcharts-color-3 { fill: #C34822; stroke: #C34822; color: #C34822; }
+.highcharts-color-4 { fill: #332C3E; stroke: #332C3E; color: #332C3E; }
