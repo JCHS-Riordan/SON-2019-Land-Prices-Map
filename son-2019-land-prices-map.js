@@ -48,15 +48,15 @@ $(document).ready(function() {
   $.get(H.JCHS.requestURL(sheetID, range), function(obj) {
     categories = obj.values[0]
     ref_data = obj.values.slice(1)
-    
+
     //create the title, notes, and search box
-    $('#chart_title').html(chart_title)
+    //$('#chart_title').html(chart_title) //Disabling for use on website, where the title is in the page, making this title redundant
     $('#table_notes').html(table_notes)
 
     //create the chart
-    createChart() 
+    createChart()
 
-  }) 
+  })
 }) //end document.ready
 
 
@@ -86,9 +86,9 @@ function createChart() {
       labelFormatter: function () { //Formatting the legend to match style preferences
         if ((this.from == 0) & (this.to == 25)) { //legend entries w/ upper & lower bound
           return '0–24'
-        } else if ((this.from == 25) & (this.to == 50)) { 
+        } else if ((this.from == 25) & (this.to == 50)) {
           return '25–49'
-        } else if ((this.from == 50) & (this.to == 100)) { 
+        } else if ((this.from == 50) & (this.to == 100)) {
           return '50–99'
         } else if (this.to !=null) { //lowest legend entry
           return 'Decline'
@@ -125,21 +125,21 @@ function createChart() {
       JCHS: { sheetID: sheetID },
       chartOptions: {
         title: { text: chart_title},
-      },            
+      },
       buttons: {
         contextButton: {
           menuItems: ['viewFullDataset']
         /*menuItems: ['viewFullDataset', 'separator', 'downloadPDF', 'separator', 'downloadPNG', 'downloadJPEG'] */
         } //end contextButtons
-      } //end buttons 
+      } //end buttons
     }, //end exporting
-    
+
     tooltip: {
       formatter: function() {
         var point = this.point
         var series = this.series
-        var user_selection = $('#user_input :checked').val()   
-        
+        var user_selection = $('#user_input :checked').val()
+
         var tooltip_text = ''
         tooltip_text +=  '<b>' +  point.name + '</b>'
 
@@ -165,7 +165,7 @@ function createChart() {
             tooltip_text +=  '<br><br>Corresponding Metropolitan Area: <b>' + (row[7]) + '</b>'
             tooltip_text += '<br>Metro Area Price per Acre, 2012: <b>$' + H.JCHS.numFormat(row[8]) + '</b>'
             tooltip_text += '<br>Metro Area Price per Acre, 2017: <b>$' + H.JCHS.numFormat(row[9]) + '</b>'
-            tooltip_text += '<br>Change in Metro Area Price per Acre, 2012-2017: <b>' + H.JCHS.numFormat(row[10]) + '%</b>'      
+            tooltip_text += '<br>Change in Metro Area Price per Acre, 2012-2017: <b>' + H.JCHS.numFormat(row[10]) + '%</b>'
           }
         })
         return tooltip_text
@@ -178,7 +178,7 @@ function createChart() {
     'container',
     chart_options
   ) //end chart
-  
+
 } //end createChart()
 
 /*~~~~~~~~~~~~~~ User interaction ~~~~~~~~~~~~~~~~~~~*/
@@ -188,7 +188,7 @@ function initUserInteraction () {
     var new_data = ref_data.map(function (x) {
       return [x[0], x[new_col]]
     })
-    chart.series[0].update({name: categories[new_col]})   
+    chart.series[0].update({name: categories[new_col]})
     chart.series[0].setData(new_data)
     //If/else loop for changing the data classes and legend for change/price -RF
     if($('#user_input :checked').val() < 5) { //Price 2012 val is 3, Price 2017 is 4
@@ -202,9 +202,9 @@ function initUserInteraction () {
         labelFormatter: function () {
           if ((this.from == 0) & (this.to == 50000)) { //legend entries w/ upper & lower bound
             return 'Less than $50,000'
-          } else if ((this.from == 50000) & (this.to == 100000)) { 
+          } else if ((this.from == 50000) & (this.to == 100000)) {
             return '$50,000–$99,999'
-          } else if ((this.from == 100000) & (this.to == 200000)) { 
+          } else if ((this.from == 100000) & (this.to == 200000)) {
             return '$100,000–$199,999'
           } else if ((this.from == 200000) & (this.to == 500000)) {
             return '$200,000–$499,999'
@@ -224,9 +224,9 @@ function initUserInteraction () {
         labelFormatter: function () { //Have to redeclare the default formatter here
           if ((this.from == 0) & (this.to == 25)) { //legend entries w/ upper & lower bound
             return '0–24'
-          } else if ((this.from == 25) & (this.to == 50)) { 
+          } else if ((this.from == 25) & (this.to == 50)) {
             return '25–49'
-          } else if ((this.from == 50) & (this.to == 100)) { 
+          } else if ((this.from == 50) & (this.to == 100)) {
             return '50–99'
           } else if (this.to !=null) { //lowest legend entry
             return 'Decline'
