@@ -59,7 +59,6 @@ $(document).ready(function() {
   })
 }) //end document.ready
 
-
 function createChart() {
 
   selected_data = ref_data.map(function (x) {
@@ -163,9 +162,12 @@ function createChart() {
                 break
             } //Ending the switch, then adding common text for the tooltip over the next four lines, relating to metro areas -RF, 5/31/19
             tooltip_text +=  '<br><br>Corresponding Metropolitan Area: <b>' + (row[7]) + '</b>'
-            tooltip_text += '<br>Metro Area Price per Acre, 2012: <b>$' + H.JCHS.numFormat(row[8]) + '</b>'
-            tooltip_text += '<br>Metro Area Price per Acre, 2017: <b>$' + H.JCHS.numFormat(row[9]) + '</b>'
-            tooltip_text += '<br>Change in Metro Area Price per Acre, 2012-2017: <b>' + H.JCHS.numFormat(row[10]) + '%</b>'
+            //Some counties have no corresponding metro. The Google Sheet has 'N/A (Non-Metro)' listed, and the follow if statement makes the tooltip for those counties stop there, but for all other counties, to continue and provide metro area price information
+            if(row[7] != "N/A (Non-Metro)") {
+              tooltip_text += '<br>Metro Area Price per Acre, 2012: <b>$' + H.JCHS.numFormat(row[8]) + '</b>'
+              tooltip_text += '<br>Metro Area Price per Acre, 2017: <b>$' + H.JCHS.numFormat(row[9]) + '</b>'
+              tooltip_text += '<br>Change in Metro Area Price per Acre, 2012-2017: <b>' + H.JCHS.numFormat(row[10]) + '%</b>'
+            }
           }
         })
         return tooltip_text
